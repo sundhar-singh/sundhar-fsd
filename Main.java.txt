@@ -1,0 +1,56 @@
+package com.assesmentproj;
+
+import java.util.List;
+import java.util.Scanner;
+public class Main {
+	static final String folderlocation="d:\\fileoperations\\";
+
+	public static void main(String[] args) {
+		
+FileOperations obj=new FileOperations();
+		FileOperations.Welcomescreen();
+		
+		@SuppressWarnings("resource")
+		Scanner input=new Scanner(System.in);
+		String newline=System.lineSeparator();
+		 {
+			 while(true) {
+		System.out.println("Press 1.For display the files"+newline+"Press 2.For add the file"+newline+"Press 3.For search the file"+newline+"Press 4.For  delete the file"+newline+"Press 5.For exit the file");
+		char ch=input.next().charAt(0);
+		switch(ch) {
+		
+		case '1':
+		List<String> filenames=FileOperations.ToDisplayFile(folderlocation);
+		for(String file:filenames)
+			System.out.println(file);
+		System.out.println(" ");
+		break;
+		
+		
+		case '2':
+		System.out.println("enter filename for your new file");
+		String text=input.next();
+	    FileOperations.filecreate(folderlocation+text);
+		break;
+				
+		case '3':
+		System.out.println("enter file to search");
+		String text1=input.next();
+	    FileOperations.searchfile(text1);
+		break;
+				
+		case '4':
+		System.out.println("enter filename to delete");
+		String text2=input.next();
+		FileOperations.deletefile(folderlocation+text2);
+		break;
+		
+		case '5':
+			System.exit(0);
+			
+		}
+			 }	
+			
+		}			
+	}
+}

@@ -1,0 +1,130 @@
+
+package com.assesmentproj;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class FileOperations {
+	
+	public static void Welcomescreen() {
+		
+		System.out.println(" This is sundhar singh");
+		System.out.println("    ");
+		System.out.println("This application performs");
+		System.out.println("a. Retrieve all file names from the fileoperations folder");
+		System.out.println("b. Add,Search,Delete files in fileoperations folder");
+		System.out.println("      ");
+		System.out.println("      ");
+		System.out.println("Choose any one option from below and press Enter");
+		System.out.println("      ");
+		
+		
+	}
+	
+	public static List<String> ToDisplayFile(String folderpath) {
+		File directorypath=new File(folderpath);
+		File filesList[]=directorypath.listFiles();
+		List<String> filenames=new ArrayList<String>();
+		
+		Collections.sort(filenames);
+		for(File file:filesList) {
+			filenames.add(file.getName());
+		}
+		
+		
+		return filenames;
+		
+	}
+	
+	
+    public static void filecreate(String filename) {
+		
+	    try {
+	    	File myObj=new File(filename);
+	    	if (myObj.createNewFile()) {
+	    		System.out.println("file is created");
+	    		FileWriter myWriter=new FileWriter(filename);
+	    		Scanner input1=new Scanner(System.in);
+	    		System.out.println("if you want to enter content for the file(y/n)?");
+	    		char operator=input1.next().charAt(0);
+	    		switch(operator) {
+	    		case 'y':
+	    			Scanner input=new Scanner(System.in);
+	    			System.out.println("Type content to your file");
+		    		String sc=input.nextLine();
+		    		myWriter.write(sc);
+		    		myWriter.close();
+		    	    System.out.println("Successfully enterd the content in to the file");
+		    		break;
+		    		
+	    		case 'n':
+	    			System.out.println("nothing written to file");
+	    			break;
+	    		                  }
+	    		
+	    	}
+	    	else {
+	    		System.out.println("already there is file with this name");
+	    		System.out.println("_____________________________");
+	    	}  		
+	    }
+	    catch(IOException e) {
+	    	System.out.println("an error occured.");
+	    	e.printStackTrace();
+	    }
+	}
+    
+    //method to search file from existing folder
+    public static void searchfile(String filename) {
+	
+	File directory=new File("d:\\fileoperations");
+	 
+	String flist[]=directory.list();
+	
+	int flag=0;
+	
+	if(flist==null) {
+		System.out.println("empty directory");
+	}
+	else {
+		
+		for (int i=0;i<flist.length;i++) {
+			String files=flist[i];
+			if(files.equalsIgnoreCase(filename)) {
+				System.out.println(files +" :found");
+				System.out.println("******************");
+			    flag=1;
+			}
+		}	
+		
+	}
+	
+	if (flag==0) {
+		System.out.println("file not found");
+		System.out.println("******************");
+	}	
+	
+}
+
+    
+     public static void deletefile(String filename1) {
+    	 	File myObj=new File(filename1);
+		
+		if(myObj.delete()) {
+			System.out.println("file deleted successfully");
+		}
+		else {
+			System.out.println("file doesnt exist");
+			
+		}
+    	 
+     }
+}
+	
+	
+	
+     
+
